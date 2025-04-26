@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Preferences - Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="job-listings.html">Job Listings</a>
+            <a href="logout.html">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Job Preferences Form -->
+    <section class="preferences-container">
+        <h2>Set Your Job Preferences</h2>
+        <form id="preferencesForm">
+            <div class="input-group">
+                <label for="job-location">Preferred Location</label>
+                <input type="text" id="job-location" name="job-location" required placeholder="Enter preferred location">
+            </div>
+
+            <div class="input-group">
+                <label for="expected-salary">Expected Salary (in INR)</label>
+                <input type="number" id="expected-salary" name="expected-salary" required placeholder="Enter expected salary">
+            </div>
+
+            <div class="input-group">
+                <label for="job-timing">Preferred Job Timing</label>
+                <select id="job-timing" name="job-timing" required>
+                    <option value="full-time">Full-Time</option>
+                    <option value="part-time">Part-Time</option>
+                    <option value="flexible">Flexible Hours</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="working-hours">Preferred Working Hours</label>
+                <input type="number" id="working-hours" name="working-hours" required placeholder="Enter hours per week">
+            </div>
+
+            <div class="input-group">
+                <label for="working-mode">Preferred Working Mode</label>
+                <select id="working-mode" name="working-mode" required>
+                    <option value="remote">Remote</option>
+                    <option value="in-office">In-Office</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="job-type">Preferred Job Type</label>
+                <select id="job-type" name="job-type" required>
+                    <option value="technical">Technical</option>
+                    <option value="non-technical">Non-Technical</option>
+                    <option value="teaching">Teaching</option>
+                    <option value="medical">Medical</option>
+                    <option value="nurse">Nurse</option>
+                    <option value="banking">Banking</option>
+                    <option value="retail">Retail</option>
+                </select>
+            </div>
+
+            <button type="submit" class="preferences-btn">Save Preferences</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Job Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("preferencesForm").addEventListener("submit", function(event) {
+            event.preventDefault();  
+
+            const jobLocation = document.getElementById("job-location").value.trim();
+            const expectedSalary = parseInt(document.getElementById("expected-salary").value);
+            const jobTiming = document.getElementById("job-timing").value;
+            const workingHours = parseInt(document.getElementById("working-hours").value);
+            const workingMode = document.getElementById("working-mode").value;
+            const jobType = document.getElementById("job-type").value;
+
+            const preferences = {
+                location: jobLocation.toLowerCase(),
+                expectedSalary: expectedSalary,
+                jobTiming: jobTiming,
+                workingHours: workingHours,
+                workingMode: workingMode,
+                jobType: jobType
+            };
+
+            localStorage.setItem("preferences", JSON.stringify(preferences));
+
+            alert("Your preferences have been saved successfully!");
+            window.location.href = "job-listings.html"; // Redirect to job listings
+        });
+    </script>
+
+</body>
+</html>

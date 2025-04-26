@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- Registration Form -->
+    <div class="form-container">
+        <div class="form-content">
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <input type="text" id="name" placeholder="Enter Name" required>
+                <input type="email" id="email" placeholder="Enter Email" required>
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Job Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const user = { name, email, password };
+            localStorage.setItem("user", JSON.stringify(user));
+
+            window.location.href = "login.html";
+        });
+    </script>
+
+</body>
+</html>

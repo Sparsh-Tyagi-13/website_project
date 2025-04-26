@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferred Jobs</title>
+    <style>
+        /* Your existing styles */
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .job-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+        }
+
+        .job-card:hover {
+            transform: scale(1.05);
+        }
+
+        .apply-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .apply-btn:hover {
+            background: #27ae60;
+        }
+
+        .apply-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Job Listings Based on Your Preferences</h1>
+    <div class="job-grid" id="job-listings"></div>
+
+    <script>
+        // Sample job data (this would normally be fetched from a database)
+        const allJobs = [
+            {
+                title: "Software Engineer",
+                company: "Tech Solutions Pvt Ltd",
+                location: "Noida",
+                salary: 80000,
+                jobType: "Full-Time",
+                description: "Develop web applications using JavaScript, React, and Node.js."
+            },
+            {
+                title: "Nurse",
+                company: "HealthCare Ltd",
+                location: "Delhi",
+                salary: 50000,
+                jobType: "Full-Time",
+                description: "Provide nursing care and support to patients."
+            },
+            {
+                title: "Web Developer",
+                company: "WebWorks",
+                location: "Bangalore",
+                salary: 60000,
+                jobType: "Part-Time",
+                description: "Build and maintain websites using HTML, CSS, and JavaScript."
+            },
+            // Add more jobs here...
+        ];
+
+        // Fetch preferences from localStorage
+        const preferences = JSON.parse(localStorage.getItem('preferences'));
+
+        // Filter jobs based on preferences
+        const filteredJobs = allJobs.filter(job => {
+            return (
+                (preferences.location === job.location) &&
+                (preferences.jobType === job.jobType) &&
+                (job.salary >= preferences.minSalary && job.salary <= preferences.maxSalary)
+            );
+        });
+
+        // Display filtered jobs
+        const jobListingsContainer = document.getElementById('job-listings');
+        
+        if (filteredJobs.length > 0) {
+            filteredJobs.forEach(job => {
+                const jobCard = document.createElement('div');
+                jobCard.classList.add('job-card');
+                jobCard.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <p>Company: ${job.company}</p>
+                    <p>Location: ${job.location}</p>
+                    <p>Salary: ₹${job.salary}</p>
+                    <p>Job Type: ${job.jobType}</p>
+                    <p><strong>Description:</strong> ${job.description}</p>
+                    <button class="apply-btn" onclick="applyJob()">Apply Now</button>
+                `;
+                jobListingsContainer.appendChild(jobCard);
+            });
+        } else {
+            jobListingsContainer.innerHTML = "<p>No jobs matching your preferences found.</p>";
+        }
+
+        function applyJob() {
+            alert('Application submitted!');
+        }
+    </script>
+
+</body>
+</html>

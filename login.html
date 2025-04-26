@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+          
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Enter Email" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter Password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Job Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            if (user && user.email === email && user.password === password) {
+                window.location.href = "preferences.html";
+            } else {
+                alert("Invalid credentials, please try again.");
+            }
+        });
+    </script>
+
+</body>
+</html>

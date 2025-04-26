@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search - Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="preferences.html">Job Preferences</a>
+            <a href="logout.html">Logout</a>
+        </div>
+    </nav>
+
+    <section class="job-listings-container">
+        <h2>Find Jobs Matching Your Preferences</h2>
+        <div class="job-grid" id="job-listings"></div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const allJobs = [
+                { title: "Software Engineer", location: "Noida", salary: 80000, type: "Full-Time" },
+                { title: "Data Analyst", location: "Delhi", salary: 60000, type: "Part-Time" },
+                { title: "Product Manager", location: "Greater Noida", salary: 120000, type: "Full-Time" },
+                { title: "UX Designer", location: "Ghaziabad", salary: 70000, type: "Full-Time" },
+                { title: "Web Developer", location: "Noida", salary: 90000, type: "Full-Time" },
+                { title: "Marketing Executive", location: "Delhi", salary: 50000, type: "Full-Time" },
+                { title: "HR Manager", location: "Greater Noida", salary: 75000, type: "Full-Time" },
+                { title: "Network Engineer", location: "Ghaziabad", salary: 85000, type: "Full-Time" }
+            ];
+
+            const preferences = JSON.parse(localStorage.getItem("preferences"));
+            let filteredJobs = allJobs;
+
+            if (preferences) {
+                filteredJobs = allJobs.filter(job => 
+                    job.salary >= preferences.salary &&
+                    job.type === preferences.jobType &&
+                    (job.location === preferences.location || preferences.location === "Remote")
+                );
+            }
+
+            const jobListContainer = document.getElementById("job-listings");
+            jobListContainer.innerHTML = "";
+
+            if (filteredJobs.length === 0) {
+                jobListContainer.innerHTML = "<p>No jobs found matching your preferences.</p>";
+                return;
+            }
+
+            filteredJobs.forEach(job => {
+                const jobCard = document.createElement("div");
+                jobCard.classList.add("job-card");
+                jobCard.innerHTML = `
+                    <h4>${job.title}</h4>
+                    <p><strong>Location:</strong> ${job.location}</p>
+                    <p><strong>Salary:</strong> ₹${job.salary}</p>
+                    <p><strong>Type:</strong> ${job.type}</p>
+                    <a href="job-detail.html?title=${encodeURIComponent(job.title)}" class="view-btn">View Details</a>
+                    <a href="apply.html?title=${encodeURIComponent(job.title)}" class="apply-btn">Apply Now</a>
+                `;
+                jobListContainer.appendChild(jobCard);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Applications</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="job-listings.html">Job Listings</a>
+        </div>
+    </nav>
+
+    <section class="applications-container">
+        <h2>Submitted Applications</h2>
+        <div id="applications-list"></div>
+    </section>
+
+    <script>
+        function loadApplications() {
+            const applicationsList = document.getElementById("applications-list");
+            applicationsList.innerHTML = "";
+
+            const applications = JSON.parse(localStorage.getItem("applications")) || [];
+
+            if (applications.length === 0) {
+                applicationsList.innerHTML = "<p>No applications submitted yet.</p>";
+                return;
+            }
+
+            applications.forEach((app, index) => {
+                const appCard = document.createElement("div");
+                appCard.classList.add("application-card");
+                appCard.innerHTML = `
+                    <h4>${app.title}</h4>
+                    <p><strong>Location:</strong> ${app.location}</p>
+                    <p><strong>Salary:</strong> ₹${app.salary}</p>
+                    <p>${app.description}</p>
+                    <p><small>Applied on: ${app.timestamp}</small></p>
+                    <button onclick="deleteApplication(${index})">Delete</button>
+                `;
+                applicationsList.appendChild(appCard);
+            });
+        }
+
+        function deleteApplication(index) {
+            let applications = JSON.parse(localStorage.getItem("applications")) || [];
+            applications.splice(index, 1);
+            localStorage.setItem("applications", JSON.stringify(applications));
+            loadApplications();
+        }
+
+        window.onload = loadApplications;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="preferences.html">Job Preferences</a>
+            <a href="logout.html">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Profile Page Content -->
+    <div class="container">
+        <h2>Your Profile</h2>
+
+        <div id="user-info">
+            <!-- User info will be populated here -->
+        </div>
+
+        <button id="logout-btn" class="logout-btn">Logout</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Job Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Populate user profile information
+        window.onload = function() {
+            const userDetails = JSON.parse(localStorage.getItem("user"));
+
+            if (!userDetails) {
+                window.location.href = "login.html";  // Redirect to login if no user data exists
+            } else {
+                document.getElementById("user-info").innerHTML = `
+                    <p><strong>Name:</strong> ${userDetails.name}</p>
+                    <p><strong>Email:</strong> ${userDetails.email}</p>
+                `;
+            }
+        };
+
+        // Handle logout
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            localStorage.removeItem("user");
+            window.location.href = "login.html";  // Redirect to login page
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings - Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="preferences.html">Job Preferences</a>
+            <a href="logout.html">Logout</a>
+        </div>
+    </nav>
+
+    <section class="job-listings-container">
+        <h2>Available Job Opportunities</h2>
+        <div class="job-grid" id="job-listings"></div>
+    </section>
+
+    <script>
+        const allJobs = [
+            { title: "Software Engineer", location: "Noida", salary: 80000, type: "Full-Time", description: "Develop web applications using JavaScript, React, and Node.js." },
+            { title: "Data Analyst", location: "Delhi", salary: 60000, type: "Part-Time", description: "Analyze business data and generate insights." },
+            { title: "Product Manager", location: "Greater Noida", salary: 120000, type: "Full-Time", description: "Lead cross-functional teams for product launches." },
+            { title: "UX Designer", location: "Ghaziabad", salary: 70000, type: "Full-Time", description: "Design user-friendly interfaces for mobile and web." },
+            { title: "Web Developer", location: "Noida", salary: 90000, type: "Full-Time", description: "Build responsive websites using HTML, CSS, and JavaScript." },
+            { title: "Marketing Executive", location: "Delhi", salary: 50000, type: "Full-Time", description: "Manage digital marketing campaigns and branding." },
+            { title: "HR Manager", location: "Greater Noida", salary: 75000, type: "Full-Time", description: "Oversee recruitment and HR policies." },
+            { title: "Network Engineer", location: "Ghaziabad", salary: 85000, type: "Full-Time", description: "Maintain and troubleshoot network infrastructure." }
+        ];
+
+        const jobListContainer = document.getElementById("job-listings");
+
+        allJobs.forEach(job => {
+            const jobCard = document.createElement("div");
+            jobCard.classList.add("job-card");
+            jobCard.innerHTML = `
+                <h4>${job.title}</h4>
+                <p><strong>Location:</strong> ${job.location}</p>
+                <p><strong>Salary:</strong> ₹${job.salary}</p>
+                <p>${job.description}</p>
+                <a href="job-detail.html?title=${encodeURIComponent(job.title)}&desc=${encodeURIComponent(job.description)}&location=${encodeURIComponent(job.location)}&salary=${job.salary}" class="apply-btn">Apply Now</a>
+            `;
+            jobListContainer.appendChild(jobCard);
+        });
+    </script>
+
+</body>
+</html>

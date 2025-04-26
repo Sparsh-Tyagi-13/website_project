@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-container">
+        <h2>Welcome to Your Dashboard</h2>
+        <div id="user-info">
+            <!-- User info will be populated here -->
+        </div>
+        <button id="logout-btn">Logout</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Job Portal. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to display user info on the dashboard and handle logout
+        window.onload = function() {
+            const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+            if (!loggedInUser) {
+                // Redirect to login if no logged-in user
+                window.location.href = "login.html";
+            } else {
+                // Display user info on the page
+                document.getElementById("user-info").innerHTML = `
+                    <p>Name: ${loggedInUser.name}</p>
+                    <p>Email: ${loggedInUser.email}</p>
+                `;
+            }
+        };
+
+        // Handle logout
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "login.html";  // Redirect to login page
+        });
+    </script>
+</body>
+</html>

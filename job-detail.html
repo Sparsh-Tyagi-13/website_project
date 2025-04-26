@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #007bff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar-container a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+        .navbar-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Job Details Section */
+        .job-detail-container {
+            width: 50%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h4 {
+            text-align: center;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #218838;
+        }
+
+        /* Confirmation Popup */
+        .confirmation-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+        .confirmation-popup button {
+            margin: 5px;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .confirmation-popup button:first-child {
+            background: #007bff;
+            color: white;
+        }
+        .confirmation-popup button:last-child {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html">Home</a>
+            <a href="job-listings.html">Back to Listings</a>
+            <a href="applications.html">View Applications</a>
+        </div>
+    </nav>
+
+    <section class="job-detail-container">
+        <h2 id="job-title"></h2>
+        <h4 id="company-name"></h4>
+        <p><strong>Location:</strong> <span id="job-location"></span></p>
+        <p><strong>Salary:</strong> ₹<span id="job-salary"></span></p>
+        <p><strong>Job Type:</strong> <span id="job-type"></span></p>
+        <p><strong>Working Hours:</strong> <span id="job-hours"></span></p>
+        <p><strong>Experience Required:</strong> <span id="job-experience"></span></p>
+        <p><strong>About the Job:</strong></p>
+        <p id="job-description"></p>
+        <p><strong>Company Overview:</strong></p>
+        <p id="company-description"></p>
+        <button id="apply-btn">Apply Now</button>
+    </section>
+
+    <script>
+        // Get job details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobTitle = urlParams.get("title") || "Unknown Job Title";
+        const jobLocation = urlParams.get("location") || "Not Specified";
+        const jobSalary = urlParams.get("salary") || "Not Disclosed";
+        const jobDescription = urlParams.get("desc") || "No Description Available";
+        const jobType = urlParams.get("type") || "Full-Time";
+        const jobHours = urlParams.get("hours") || "9 AM - 6 PM";
+        const jobExperience = urlParams.get("experience") || "1-3 years";
+        const companyName = urlParams.get("company") || "Tech Solutions Pvt Ltd";
+        const companyDescription = urlParams.get("companyDesc") || "A leading IT solutions provider.";
+
+        // Set job details in the HTML
+        document.getElementById("job-title").innerText = jobTitle;
+        document.getElementById("company-name").innerText = companyName;
+        document.getElementById("job-location").innerText = jobLocation;
+        document.getElementById("job-salary").innerText = jobSalary;
+        document.getElementById("job-type").innerText = jobType;
+        document.getElementById("job-hours").innerText = jobHours;
+        document.getElementById("job-experience").innerText = jobExperience;
+        document.getElementById("job-description").innerText = jobDescription;
+        document.getElementById("company-description").innerText = companyDescription;
+
+        // Apply Now button functionality
+        document.getElementById("apply-btn").addEventListener("click", () => {
+            if (!confirm("Are you sure you want to apply for this job?")) {
+                return; // Stop execution if user cancels
+            }
+
+            // Create application object
+            const application = {
+                title: jobTitle,
+                company: companyName,
+                location: jobLocation,
+                salary: jobSalary,
+                jobType: jobType,
+                workingHours: jobHours,
+                experience: jobExperience,
+                description: jobDescription,
+                companyDescription: companyDescription,
+                timestamp: new Date().toLocaleString()
+            };
+
+            // Store application in local storage
+            let applications = JSON.parse(localStorage.getItem("applications")) || [];
+            applications.push(application);
+            localStorage.setItem("applications", JSON.stringify(applications));
+
+            // Create confirmation popup
+            const confirmationBox = document.createElement("div");
+            confirmationBox.classList.add("confirmation-popup");
+            confirmationBox.innerHTML = `
+                <p>Application submitted successfully!</p>
+                <button onclick="window.location.href='applications.html'">View Applications</button>
+                <button onclick="this.parentElement.style.display='none'">Close</button>
+            `;
+            
+            document.body.appendChild(confirmationBox);
+        });
+    </script>
+
+</body>
+</html>

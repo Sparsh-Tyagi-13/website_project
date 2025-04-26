@@ -1,28 +1,85 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Dream Job</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="active">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="logout.html">Logout</a>
+        </div>
+    </nav>
 
-main {
-    padding: 20px;
-    text-align: center;
-}
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="animate-text">Find Your <span>Dream Job</span></h1>
+            <p class="hero-quote">"The future belongs to those who believe in the beauty of their dreams."</p>
+            
+            <!-- Login & Register Buttons -->
+            <div class="action-buttons">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="register.html" class="btn-register">Start Your Dream</a>
+            </div>
+        </div>
+    </section>
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-}
+    <!-- Inspiring CEOs Section -->
+    <section class="example-ceos">
+        <h2>Dream Big Like These CEOs</h2>
+        <div class="ceo-container">
+            <div class="ceo">
+                <img src="images/sun.png" alt="Sundar Pichai">
+                <h3>Sundar Pichai</h3>
+                <p>CEO of Google</p>
+                <p class="ceo-description">Sundar Pichai is known for his strategic thinking and leadership at Google, overseeing innovations like Android and Chrome.</p>
+            </div>
+            <div class="ceo">
+                <img src="images/add.png" alt="Andy Jassy">
+                <h3>Andy Jassy</h3>
+                <p>CEO of Amazon</p>
+                <p class="ceo-description">Andy Jassy succeeded Jeff Bezos as Amazon's CEO, having previously led Amazon Web Services (AWS) to monumental growth.</p>
+            </div>
+            <div class="ceo">
+                <img src="images/snn.png" alt="Satya Nadella">
+                <h3>Satya Nadella</h3>
+                <p>CEO of Microsoft</p>
+                <p class="ceo-description">Satya Nadella transformed Microsoft into a cloud-first company and fostered a culture of innovation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Reviews -->
+    <section class="reviews">
+        <h2>What Our Users Say</h2>
+        <div class="review-container">
+            <div class="review">
+                <p>"I found my dream job with this portal! The process was simple, and I got hired within a month!"</p>
+                <h4>Puja Chauhan</h4>
+            </div>
+            <div class="review">
+                <p>"Excellent platform! The job recommendations are spot on and tailored to my skills and experience."</p>
+                <h4>Gauri Tyagi</h4>
+            </div>
+            <div class="review">
+                <p>"The best job search experience I've had. I was able to apply to multiple positions with ease."</p>
+                <h4>Aryaman Mehta</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Job Portal. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
