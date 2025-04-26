@@ -1,0 +1,30 @@
+<!DOCType html>
+<html>
+<head>
+<title>PujaChauahan<\title>
+<\head>
+<body>
+<h1> Hello i was quite busy since morning. <\h1>
+<table>
+table th td{
+background-color="red";
+color="yellow";
+}
+<table>
+<tr>
+<th>email<\th>
+<th name <\th>
+<\tr>
+<tr>
+<td>chauhanpuja<\th>
+<td>PUja<\th>
+<\table>
+<\body>
+<\html>
+
+
+
+
+
+
+
